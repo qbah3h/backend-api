@@ -14,7 +14,7 @@ app.use('/api', require('./routes/stores'));
 mongoose.connect(config.get('mongodb.fake'), { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => {
         app.listen(config.get('port'), () => {
-            require('./utils/initializer').init()
+            require('./utils/initializer').init().then(require('./utils/initializer').seeder())
             logger.info('API initialized on port ' + config.get('port'))
         });
     })

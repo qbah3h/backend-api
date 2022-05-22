@@ -45,50 +45,24 @@ router.route('/stores')
   },
     function (req, res) {
       logger.info("get pending use case")
-      User.find({
-      'username': username
-    })
-      .then(user => {
-        if (!user[0]) {
-          res.status(500).send({
-            message: 'Invalid password or username.'
-          });
-          logger.error('Invalid password or username.')
-        } else {
-          bcrypt.compare(password, user[0].password, function (err, result) {
-            if (result) next()
-            else {
-              res.status(500).send({
-                message: 'Invalid password or username.'
-              });
-              logger.error('Invalid password or username.')
-            }
-          });
+      const limit = req.query.limit ? parseInt(req.query.limit) : 0
+      const page = req.query.page ? parseInt(req.query.page) : 0
 
-        }
-      })
-      .catch(err => {
-        logger.error(err)
-        res.status(500).send(error);
-      })
-      let response = {
-        data: [
-          {
-            name: 'Store 1',
-            cuit: 'ABCDEFG',
-            concepts: ['one', 'two', 'tree'],
-            currentBalance: 500,
-            active: true,
-            lastSale: new Date(),
-          },
-          {}
-        ],
-        page: 1,
-        pages: 30,
-        limit: 10,
-        total: 300
-      }
-      res.status(200).json(response);
+      Store.find({}).limit(limit).skip(limit * page)
+        .then(store => {
+          let response = {
+            data: store,
+            page: page,
+            pages: 30,
+            limit: limit,
+            total: 300
+          }
+          res.status(200).json(response);
+        })
+        .catch(err => {
+          logger.error(err)
+          res.status(500).send(error);
+        })
     })
   .post(function (req, res, next) {
     logger.info("post pending validations")
@@ -97,6 +71,7 @@ router.route('/stores')
   },
     function (req, res) {
       logger.info("post pending use case")
+      //same as seeder function
       res.send('post')
     });
 
