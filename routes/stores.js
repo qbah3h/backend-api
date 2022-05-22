@@ -65,6 +65,7 @@ router.route('/stores')
   .post(function (req, res, next) {
     logger.info("post pending validations")
     //similar login validator as get, can be refactored as a midleware
+    console.log()
     next()
   },
     function (req, res) {
