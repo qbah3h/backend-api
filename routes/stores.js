@@ -4,8 +4,6 @@ const router = express.Router();
 const User = require('../models/user')
 const Store = require('../models/store')
 let bcrypt = require('bcrypt-nodejs');
-const url = require('url');
-const querystring = require('querystring');
 
 //res.status(200).json(orders);
 //res.status(500).send(error);

@@ -11,7 +11,7 @@ const config = require('config');
 app.use('/api', require('./routes/stores'));
 
 
-mongoose.connect(config.get('mongodb.fake'), { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(`mongodb+srv://${config.get('mongodb.dbname')}:${config.get('mongodb.password')}@cryptocommerce.udldu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => {
         app.listen(config.get('port'), () => {
             require('./utils/initializer').init().then(require('./utils/initializer').seeder())
