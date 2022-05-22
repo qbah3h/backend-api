@@ -13,9 +13,9 @@ app.use('/api', require('./routes/stores'));
 
 mongoose.connect(`mongodb+srv://${config.get('mongodb.dbname')}:${config.get('mongodb.password')}@cryptocommerce.udldu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => {
-        app.listen(config.get('port'), () => {
+        app.listen(() => {
             require('./utils/initializer').init().then(require('./utils/initializer').seeder())
-            logger.info('API initialized on port ' + config.get('port'))
+            logger.info('API initialized on port ')
         });
     })
     .catch((error) => console.log(error))
