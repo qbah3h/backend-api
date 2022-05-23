@@ -4,7 +4,7 @@
   "description": "REST service",
   "main": "app.js",
   "scripts": {
-    "run": "node $NODE_DEBUG_OPTION app.js",
+    "start": "node app.js",
     "test": "nodemon app.js"
   },
   "author": "",
@@ -21,6 +21,8 @@
     "winston": "~2.4.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.16",
+    "supertest": "^6.2.3"
   }
 }
