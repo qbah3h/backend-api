@@ -9,7 +9,7 @@ describe('Check if the login validation works (/stores)', function() {
     })
     it('Should return error 200', async () => {
         const response = await request(store).get('/api/stores').auth('test@koibanx.com', 'admin').send()
-        assert.equal(response.statusCode, 201)
+        assert.equal(response.statusCode, 200)
     })
 })
 
@@ -17,6 +17,5 @@ describe('Check if the login validation works (/stores)', function() {
 
 // inputs = username
 
-// if there is no user provider return an error
-// if there is a username and is not valid return an error
-// if there is a valid user then return all stores
+// if there is a username and is not valid return 401
+// if there is a valid user then return 200
