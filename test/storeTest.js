@@ -1,0 +1,22 @@
+const store = require('../app');
+const assert = require('assert')
+const request = require('supertest')
+
+describe('Check if the login validation works (/stores)', function() {
+    it('Should return error 401', async () => {
+        const response = await request(store).get('/api/stores').auth('fakeusername', 'fakepassword').send()
+        assert.equal(response.statusCode, 401)
+    })
+    it('Should return error 200', async () => {
+        const response = await request(store).get('/api/stores').auth('test@koibanx.com', 'admin').send()
+        assert.equal(response.statusCode, 201)
+    })
+})
+
+// Get all stores API
+
+// inputs = username
+
+// if there is no user provider return an error
+// if there is a username and is not valid return an error
+// if there is a valid user then return all stores

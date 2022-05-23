@@ -7,9 +7,10 @@ const app = express()
 const dotenv = require('dotenv');
 dotenv.config();
 const config = require('config');
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
 
 app.use('/api', require('./routes/stores'));
-
 
 mongoose.connect(`mongodb+srv://${config.get('mongodb.dbname')}:${config.get('mongodb.password')}@cryptocommerce.udldu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => {
